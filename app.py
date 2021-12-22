@@ -11,9 +11,8 @@ def create_app():
     
     app=Flask(__name__)
     app.config.from_object('settings')
-    app.add_url_rule('/', view_func = views.index)
-    app.add_url_rule('/submit', methods =['POST'] view_func=views.submit)
-
+    app.add_url_rule('/', methods = ['GET' ,'POST'], view_func = views.index)
+    app.add_url_rule('/submit', methods = ['POST'], view_func=views.submit)
     db = Database()
     
     db.load_trees('static\images')
