@@ -17,21 +17,21 @@ def home_page():
     db = current_app.config['db']
 
 def index():
-    
-    
-    db = current_app.config['db']
-    r_list = gen_random_pics(db)
-    links = db.get_trees(r_list)
-
-      
-    return render_template('index.html',images=r_list, img_list=links)
-    
-def submit():
     if request.method =='POST':
         db = current_app.config['db']
-        print(db.last_accessed)
-        print(request.form['complex'])
+        print('inside post method of index')
+        db.update_tree(db.last_accessed,request.form['complex'])
         r_list = gen_random_pics(db)
         links = db.get_trees(r_list)
 
+        
         return render_template('index.html',images=r_list, img_list=links)
+        
+    else:
+        db = current_app.config['db']
+        r_list = gen_random_pics(db)
+        links = db.get_trees(r_list)
+
+        
+        return render_template('index.html',images=r_list, img_list=links)
+        

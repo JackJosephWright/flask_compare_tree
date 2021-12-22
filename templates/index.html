@@ -14,12 +14,12 @@
                 {% endfor %}</div>
       </div>
       <p>Choose which picture is more complex:</p>
-    <form action ='' method='post' id='submit_form'>
+      <form action ='' method='post' id='submit_form'>
         <input type="radio" id='1' name='complex' value='TRUE'>
         <label for="1">Picture 1</label><br>
         <input type="radio" id='2' name='complex' value='FALSE'>
         <label for="2">Picture 2</label><br>
-        <input type="submit" value="Submit">
+        <button class="button is-primary is-small">Save</button>
     </form>
     </section>
 {% endblock %}

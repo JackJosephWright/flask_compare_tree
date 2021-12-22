@@ -32,7 +32,27 @@ class Database:
             link = self.trees[index].link
             image_address.append(link)
         return image_address
+    def update_tree(self, index_list,win):
         
+        print('inside update_tree')
+        
+
+        if win =='TRUE':
+            winner = self.trees[index_list[0]] 
+            winner.update_WL(True)
+            self.trees[index_list[0]]=winner
+            loser = self.trees[index_list[1]]
+            loser.update_WL(False)
+            self.trees[index_list[1]]=loser
+
             
             
+        else:
+            winner = self.trees[index_list[1]] 
+            winner.update_WL(True)
+            self.trees[index_list[1]]=winner
+            loser = self.trees[index_list[0]]
+            loser.update_WL(False)
+            self.trees[index_list[0]]=loser
+        print(self.trees[index_list[0]].get_WL())
 
