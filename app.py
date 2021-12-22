@@ -3,27 +3,28 @@ import os
 import random
 import sys
 
-app=Flask(__name__)
+from database import Database
+from tree import Tree
+import views
 
-def get_pics(max_length):
-    p1=random.randint(1,max_length)
-    p2=random.randint(1,max_length)
-    return[p1,p2]
-def all_equal(lst):
-    return lst[:-1] == lst[1:]
-@app.route('/', methods =['GET','POST'])
-def index():
-    pics = os.listdir('static/images')
-    pics = ['images/'+file for file in pics]
-    neq_index=get_pics(len(pics))
+def create_app():
     
-    while all_equal(neq_index):
-        neq_index=get_pics(len(pics))
-    p_list = [pics[i-1] for i in neq_index] 
+    app=Flask(__name__)
+    app.config.from_object('settings')
+    app.add_url_rule('/', methods = ['GET','POST'], view_func = views.index)
+    #app.add_url_rule('/submit', methods = ['POST'], view_func=views.submit)
+    db = Database()
     
-    return render_template('index.html',images=p_list)
-@app.route('/addRegion', methods=['POST'])
-def addRegion():
-    a = request.form['complex']
-    #print(request.form['complex'] , file = sys.stderr)
+    db.load_trees('static\images')
+    db.print_trees()
+    app.config['db']=db
     
+    
+    return app
+
+
+
+if __name__ == "__main__":
+    app = create_app()
+    port = app.config.get("PORT", 5000)
+    app.run(host="0.0.0.0", port=port)
