@@ -1,1 +1,1 @@
-web gunicorn flask_compare_tree.app:app
+web gunicorn server:app
