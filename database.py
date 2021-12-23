@@ -34,12 +34,14 @@ class Database:
         return image_address
     def update_tree(self, index_list,win):
         
-        print('inside update_tree')
+        #print('inside update_tree')
         
 
         if win =='TRUE':
+            print('index list:{}'.format(index_list))
             winner = self.trees[index_list[0]] 
             winner.update_WL(True)
+            print(winner.get_WL())
             self.trees[index_list[0]]=winner
             loser = self.trees[index_list[1]]
             loser.update_WL(False)
