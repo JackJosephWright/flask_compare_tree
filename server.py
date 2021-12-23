@@ -15,7 +15,7 @@ def create_app():
     #app.add_url_rule('/submit', methods = ['POST'], view_func=views.submit)
     db = Database()
     
-    db.load_trees('static\images')
+    db.load_trees('static/images')
     db.print_trees()
     app.config['db']=db
     
