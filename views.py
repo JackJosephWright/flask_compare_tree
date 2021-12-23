@@ -19,9 +19,11 @@ def home_page():
 def index():
     if request.method =='POST':
         db = current_app.config['db']
-        print('inside post method of index')
-        db.update_tree(db.last_accessed,request.form['complex'])
         r_list = gen_random_pics(db)
+        print('random indexes:',r_list)
+        print('db.last_accessed:{}'.format(db.last_accessed))
+        db.update_tree(db.last_accessed,request.form['complex'])
+        
         links = db.get_trees(r_list)
 
         
