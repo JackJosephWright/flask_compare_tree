@@ -27,6 +27,7 @@ def index():
         
         r_list = gen_random_pics(db)
         db.last_accessed=r_list
+        print('checking if db_last accessed is updated:{}'.format(db.last_accessed))
         links = db.get_trees(r_list)
 
         
