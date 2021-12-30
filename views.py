@@ -1,8 +1,8 @@
 from flask import current_app, render_template, request
 from random import randint , shuffle , sample
 from flask.helpers import url_for
-
 from werkzeug.utils import redirect
+import threading
 
 def gen_random_pics(db):
     n_pics = len(db.trees)
@@ -26,6 +26,7 @@ def index():
         db.update_tree(db.last_accessed,request.form['complex'])
         
         r_list = gen_random_pics(db)
+        print('r list is filled with:',str(r_list))
         db.last_accessed=r_list
         print('checking if db_last accessed is updated:{}'.format(db.last_accessed))
         links = db.get_trees(r_list)
