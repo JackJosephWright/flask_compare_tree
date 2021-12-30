@@ -20,7 +20,7 @@ class Database:
             link=v.link
             W=v.W
             L=v.L
-            print(name,link,W,L)
+            print(name+link+W+L)
             
         
     def get_trees(self,index_list):
