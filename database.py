@@ -20,12 +20,12 @@ class Database:
             link=v.link
             W=v.W
             L=v.L
-            print(name+link+W+L)
+            
             
         
     def get_trees(self,index_list):
         
-        self.last_accessed=index_list
+        #self.last_accessed=index_list
         image_address = []
         
         
@@ -33,29 +33,38 @@ class Database:
             link = self.trees[index].link
             image_address.append(link)
         return image_address
+
     def update_tree(self, index_list,win):
         
-        #print('inside update_tree')
+        
         
 
         if win =='TRUE':
-            print('index list:{}'.format(index_list))
+            
             winner = self.trees[index_list[0]] 
             winner.update_WL(True)
-            print(winner.get_WL())
+            print('winner:'+str(index_list[0]))
+            winner.get_WL()
             self.trees[index_list[0]]=winner
             loser = self.trees[index_list[1]]
             loser.update_WL(False)
+            print('loser:'+str(index_list[1]))
+            loser.get_WL()
             self.trees[index_list[1]]=loser
+            
 
             
             
         else:
             winner = self.trees[index_list[1]] 
             winner.update_WL(True)
+            print('winner:'+str(index_list[1]))
+            winner.get_WL()
             self.trees[index_list[1]]=winner
             loser = self.trees[index_list[0]]
             loser.update_WL(False)
+            print('loser:'+str(index_list[0]))
+            loser.get_WL()
             self.trees[index_list[0]]=loser
-        print(self.trees[index_list[0]].get_WL())
+        
 
