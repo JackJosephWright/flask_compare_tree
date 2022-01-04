@@ -36,7 +36,7 @@ class Database:
 
     def update_tree(self, index_list,win):
         
-        
+        print(index_list)
         
 
         if win =='TRUE':
