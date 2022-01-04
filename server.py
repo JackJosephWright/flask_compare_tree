@@ -7,6 +7,8 @@ from database import Database
 from tree import Tree
 import views
 import sqlite3
+import pandas as pd
+import numpy as np
 
 def create_app():
     
