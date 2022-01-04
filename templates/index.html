@@ -19,7 +19,13 @@
         <label for="1">Picture 1</label><br>
         <input type="radio" id='2' name='complex' value='FALSE'>
         <label for="2">Picture 2</label><br>
-        <button class="button is-primary is-small">Save</button>
+        <button id=submit class="button is-primary is-small">Save</button>
     </form>
+    <div>
+      <form action="/submit_db">
+        <button id=submit_ddb >write csv</button>
+      </form>
+      
+    </div>
     </section>
 {% endblock %}
