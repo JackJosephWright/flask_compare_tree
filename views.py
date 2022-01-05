@@ -6,6 +6,9 @@ import threading
 import pandas as pd
 import numpy as np
 from database import Database
+from sqlalchemy import create_engine
+import sqlite3
+
 
 def gen_random_pics(db):
     
@@ -68,4 +71,10 @@ def results():
             print(a_dictionary)
             data.append(a_dictionary)
     df=pd.DataFrame(data)
-    return render_template('results.html', tables = [df.sort_values(by=['W'],ascending=False).to_html(classes='data')])
+    #getting sqlite3 table into program
+    dat = sqlite3.connect('tc.db')
+    query = dat.execute("SELECT * FROM tree_info")
+    cols = [column[0] for column in query.description]
+    tree_info = pd.DataFrame.from_records(data = query.fetchall(), columns = cols)
+    table_list = [df.sort_values(by=['W'],ascending=False).to_html(classes='data'),tree_info.to_html(classes='data')]
+    return render_template('results.html', tables = table_list)
