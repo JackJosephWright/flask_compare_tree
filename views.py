@@ -11,27 +11,29 @@ from sqlalchemy import create_engine, inspect
 import sqlite3
 
 
-def gen_random_pics(db):
+def gen_random_pics(n_pics):
     
-    r_list = sample(range(1,db.n_pics+1),2)
-                
-                
+    r_list = sample(range(1,n_pics+1),2)
+    while(r_list==[]):
+        r_list = sample(range(1,n_pics+1),2)           
+              
     return r_list
                 
 
 
-def home_page():
-    db = current_app.config['db']
+#def home_page():
+#    db = current_app.config['db']
 
 def index():
     if request.method =='POST':
         db = current_app.config['db']
+        
         print('INSIDE INDEX() VALUE OF db.last_accessed:',db.last_accessed)
         #print('random indexes:',db.last_accessed)
         #print('db.last_accessed:{}'.format(db.last_accessed))
         db.update_tree(db.last_accessed,request.form['complex'])
         
-        r_list = gen_random_pics(db)
+        r_list = gen_random_pics(db.n_pics)
         #print('r list is filled with:',str(r_list))
         while(db.last_accessed!=r_list):
             db.last_accessed=r_list
@@ -45,7 +47,7 @@ def index():
         
         
         db = current_app.config['db']
-        r_list = gen_random_pics(db)
+        r_list = gen_random_pics(db.n_pics)
         while(db.last_accessed!=r_list):
             db.last_accessed=r_list
         links = db.get_trees(r_list)
