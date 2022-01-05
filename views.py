@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 
 def gen_random_pics(db):
-    n_pics = db.n_pics
-    r_list = sample(range(1,n_pics+1),2)
+    
+    r_list = sample(range(1,db.n_pics+1),2)
                 
                 
     return r_list
