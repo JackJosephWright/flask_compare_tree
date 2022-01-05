@@ -21,7 +21,7 @@ def create_app():
     db.load_trees('static/images')
     db.print_trees()
     app.config['db']=db
-    for k, v in db.iteritems():
+    for k, v in db.trees.items():
         print(k,v)
     
     
