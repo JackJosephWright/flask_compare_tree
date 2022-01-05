@@ -21,6 +21,7 @@ def home_page():
 def index():
     if request.method =='POST':
         db = current_app.config['db']
+        print('INSIDE INDEX() VALUE OF db.last_accessed:',db.last_accessed)
         #print('random indexes:',db.last_accessed)
         #print('db.last_accessed:{}'.format(db.last_accessed))
         db.update_tree(db.last_accessed,request.form['complex'])
