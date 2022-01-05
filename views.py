@@ -5,6 +5,7 @@ from werkzeug.utils import redirect
 import threading
 import pandas as pd
 import numpy as np
+from database import Database
 
 def gen_random_pics(db):
     
@@ -37,6 +38,7 @@ def index():
         return render_template('index.html',images=r_list, img_list=links)
         
     else:
+        
         print('index method is get')
         db = current_app.config['db']
         r_list = gen_random_pics(db)
