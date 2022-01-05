@@ -23,6 +23,7 @@ def create_app():
     app.config['db']=db
     
     
+    
     return app
 
 

@@ -1,5 +1,6 @@
 from tree import Tree
 import os
+import re
 
 class Database:
     def __init__(self):
@@ -11,9 +12,10 @@ class Database:
         
         for filename in os.listdir(image_location):
             if filename.endswith('jpg') or filename.endswith('.png'):
+                pic_number=int(re.search('\d',filename).group())
                 self._last_tree_key +=1
                 tree=Tree(filename,link=os.path.join(image_location,filename))
-                self.trees[self._last_tree_key] = tree
+                self.trees[pic_number] = tree
             
             self.n_pics = len(self.trees)
         
