@@ -28,7 +28,8 @@ def index():
         
         r_list = gen_random_pics(db)
         #print('r list is filled with:',str(r_list))
-        db.last_accessed=r_list
+        while(db.last_accessed!=r_list):
+            db.last_accessed=r_list
         #print('checking if db_last accessed is updated:{}'.format(db.last_accessed))
         links = db.get_trees(r_list)
 
@@ -39,7 +40,8 @@ def index():
         print('index method is get')
         db = current_app.config['db']
         r_list = gen_random_pics(db)
-        db.last_accessed=r_list
+        while(db.last_accessed!=r_list):
+            db.last_accessed=r_list
         links = db.get_trees(r_list)
 
         
