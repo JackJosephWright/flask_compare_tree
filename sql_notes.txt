@@ -1,0 +1,13 @@
+creating the tree_info table 
+
+import pandas as pd
+from sqlalchemy import create_engine
+
+
+tree_info=pd.read_csv('treeinfo.csv')
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///tc.db', echo=True)
+sqlite_connection = engine.connect()
+sqlite_table= 'tree_info'
+tree_info.to_sql(sqlite_table,sqlite_connection, if_exists='fail')
+sqlite_connection.close()
