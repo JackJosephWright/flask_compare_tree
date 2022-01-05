@@ -6,6 +6,7 @@ class Database:
         self.trees = {}
         self._last_tree_key = 0
         self.last_accessed = []
+        self.n_pics = 0
     def load_trees(self, image_location='static\images'):
         
         for filename in os.listdir(image_location):
@@ -13,6 +14,8 @@ class Database:
                 self._last_tree_key +=1
                 tree=Tree(filename,link=os.path.join(image_location,filename))
                 self.trees[self._last_tree_key] = tree
+            
+            self.n_pics = len(self.trees)
         
     def print_trees(self):
         for k,v in self.trees.items():
