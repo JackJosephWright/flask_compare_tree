@@ -44,7 +44,7 @@ def index():
         return render_template('index.html',images=r_list, img_list=links)
         
     else:
-        
+        print('INDEX method is get')
         
         db = current_app.config['db']
         r_list = gen_random_pics(db.n_pics)
