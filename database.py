@@ -11,6 +11,7 @@ class Database:
         
         for filename in os.listdir(image_location):
             if filename.endswith('jpg') or filename.endswith('.png'):
+                print(filename)
                 self._last_tree_key +=1
                 tree=Tree(filename,link=os.path.join(image_location,filename))
                 self.trees[self._last_tree_key] = tree
