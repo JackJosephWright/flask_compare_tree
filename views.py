@@ -12,7 +12,16 @@ import sqlite3
 
 
 def index():
-    db = current_app.config['db']
+    
+
+
+    var_exists = 'db' in locals() or 'db' in globals()
+    if var_exists:
+        print('db object already exists')
+        pass
+    else:
+        print('db object does not exist')
+        db = current_app.config['db']
     if request.method =='POST':
         db.update_tree(request.form['complex'])
         links, img_number = db.set_new_pair()
