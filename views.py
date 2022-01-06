@@ -32,7 +32,9 @@ def index():
         #print('random indexes:',db.last_accessed)
         #print('db.last_accessed:{}'.format(db.last_accessed))
         db.update_tree(db.last_accessed,request.form['complex'])
-        
+        while(db.n_pics==[]):
+            print('inside while loop')
+            db=current_app.config['db']
         r_list = gen_random_pics(db.n_pics)
         #print('r list is filled with:',str(r_list))
         while(db.last_accessed!=r_list):
@@ -47,8 +49,10 @@ def index():
         print('INDEX method is get')
         
         db = current_app.config['db']
-        
-        print('db.n_pics:', db.n_pics)
+
+        print(type(db.n_pics))
+        print(db.n_pics)
+
         r_list = gen_random_pics(db.n_pics)
         print('r list: ',r_list)
         while(db.last_accessed!=r_list):
@@ -79,20 +83,6 @@ def results():
     scores_table=pd.DataFrame(data).set_index('name')
     print(scores_table)
     
-    
-    #check if table exists
-    # #engine = create_engine('sqlite:///tc.db') #access the DB engine
-    # #if not engine.dialect.has_table(engine, scores_table): #if table doesnt exist, create
-    #     #sqlite_connection = engine.connect()
-    #     #sqlite_table = 'scores_table'
-    #     #scores_table.to_sql(sqlite_table,sqlite_connection, if_exists='fail')
-    #     #sqlite_connection.close()
-    #     print('inside engine.dialect.hastable check')
-    # else:
-    #     dat = sqlite3.connect('tc.db')
-    #     query = dat.execute("SELECT * FROM scores_table")
-    #     cols = [column[0] for column in query.description]
-    #     old_scores = pd.DataFrame.from_records(data=query.fetchall(), columns = cols)
     engine = create_engine('sqlite:///tc.db', echo=False)
     sqlite_connection = engine.connect()
     insp = inspect(engine)
@@ -100,10 +90,14 @@ def results():
     if (insp.has_table('scores_table')==True):
         print('there is a scores table')
         old_scores=pd.read_sql_table('scores_table',sqlite_connection).set_index('name')
-        print(old_scores)
+        df_total = old_scores.add(scores_table, fill_value=0)
+        df_total.to_sql(sqlite_table,sqlite_connection,if_exists='replace')
     else:
         scores_table.to_sql(sqlite_table,sqlite_connection,if_exists='fail')
-    df_total = old_scores.add(scores_table, fill_value=0)
+        df_total=scores_table
+    
+    
+    
     
 
 
