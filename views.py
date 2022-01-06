@@ -49,9 +49,8 @@ def index():
         print(db.n_pics)
 
         r_list = gen_random_pics(db.n_pics)
-        print('r list: ',r_list)
-        while(db.last_accessed!=r_list):
-            db.last_accessed=r_list
+        print('r list: {}'.format(r_list))
+        db.last_accessed=r_list
         links = db.get_trees(r_list)
 
         
