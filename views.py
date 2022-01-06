@@ -25,9 +25,10 @@ def gen_random_pics(n_pics):
 #    db = current_app.config['db']
 
 def index():
+    db = current_app.config['db']
     if request.method =='POST':
         
-        db = current_app.config['db']
+        
         
         print('INSIDE INDEX() VALUE OF db.last_accessed:',db.last_accessed)
       
@@ -42,7 +43,7 @@ def index():
     else:
         print('INDEX method is get')
         
-        db = current_app.config['db']
+        
 
         print(type(db.n_pics))
         print(db.n_pics)
