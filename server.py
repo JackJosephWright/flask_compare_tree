@@ -21,7 +21,7 @@ def create_app():
     db_first.load_trees('static/images')
     
     app.config['db']=db_first
-    Session(app)
+    
     
     print('app created')
     print('db.last_accessed:{}'.format(db_first.last_accessed))
