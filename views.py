@@ -48,9 +48,7 @@ def index():
         
         db = current_app.config['db']
         print(type(db.n_pics))
-        while(db.n_pics ==[]):
-            print('trying to get the db')
-            db=current_app.config['db']
+        print(db.n_pics)
         r_list = gen_random_pics(db.n_pics)
         while(db.last_accessed!=r_list):
             db.last_accessed=r_list
