@@ -29,7 +29,7 @@ class Database:
         
     def get_trees(self,index_list):
         
-        #self.last_accessed=index_list
+        self.last_accessed=index_list
         image_address = []
         
         
