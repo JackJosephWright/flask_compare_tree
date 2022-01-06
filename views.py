@@ -47,6 +47,7 @@ def index():
         print('INDEX method is get')
         
         db = current_app.config['db']
+        print(db.n_pics)
         r_list = gen_random_pics(db.n_pics)
         while(db.last_accessed!=r_list):
             db.last_accessed=r_list
