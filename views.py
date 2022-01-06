@@ -15,11 +15,11 @@ def index():
     db = current_app.config['db']
     if request.method =='POST':
         db.update_tree(request.form['complex'])
-        img_number , links = db.set_new_pair()
+        links, img_number = db.set_new_pair()
         return render_template('index.html',images=img_number, img_list = links)
     
     else:
-        img_number , links = db.set_new_pair()
+        links, img_number = db.set_new_pair()
         return render_template('index.html',images=img_number, img_list=links)
 def results():
     db = current_app.config['db']
