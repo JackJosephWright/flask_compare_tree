@@ -13,9 +13,9 @@ import sqlite3
 
 def gen_random_pics(n_pics):
     
-    r_list = sample(range(1,n_pics+1),2)
+    r_list = sample(range(1,8),2)
     while(r_list==[]):
-        r_list = sample(range(1,n_pics+1),2)           
+        r_list = sample(range(1,8),2)           
               
     return r_list
                 
@@ -26,6 +26,7 @@ def gen_random_pics(n_pics):
 
 def index():
     if request.method =='POST':
+        
         db = current_app.config['db']
         
         print('INSIDE INDEX() VALUE OF db.last_accessed:',db.last_accessed)
