@@ -26,6 +26,7 @@ class Database:
     def update_tree(self, win):
         
         index_list=self.last_accessed
+        print('index_list inside update tree:{}'.format(index_list))
         if win =='TRUE':
             
             winner = self.trees[index_list[0]] 
@@ -52,6 +53,7 @@ class Database:
             self.trees[index_list[0]]=loser
     def set_new_pair(self):
         self.last_accessed=sample(range(1,8),2)
+        print('updating last accessed:{}'.format(self.last_accessed))
         link_list = self.get_trees(self.last_accessed)
         return(link_list, self.last_accessed)
     def return_scores(self):
