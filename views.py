@@ -33,6 +33,7 @@ def index():
         #print('db.last_accessed:{}'.format(db.last_accessed))
         db.update_tree(db.last_accessed,request.form['complex'])
         while(db.n_pics==[]):
+            print('inside while loop')
             db=current_app.config['db']
         r_list = gen_random_pics(db.n_pics)
         #print('r list is filled with:',str(r_list))
