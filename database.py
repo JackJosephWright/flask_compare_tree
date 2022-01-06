@@ -40,9 +40,9 @@ class Database:
 
     def update_tree(self, index_list,win):
         
-        print(index_list)
+        print(self.last_accessed)
         
-
+        index_list=self.last_accessed
         if win =='TRUE':
             
             winner = self.trees[index_list[0]] 
