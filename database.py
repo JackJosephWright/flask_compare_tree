@@ -18,6 +18,7 @@ class Database:
     def get_trees(self, index_list):
         
         image_address = []
+        index_list = self.last_accessed
 
         for index in index_list:
             link = self.trees[index].link

@@ -22,6 +22,7 @@ def index():
     else:
         print('db object does not exist')
         db = current_app.config['db']
+        
     if request.method =='POST':
         db.update_tree(request.form['complex'])
         links, img_number = db.set_new_pair()

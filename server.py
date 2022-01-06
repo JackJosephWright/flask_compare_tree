@@ -16,22 +16,20 @@ def create_app():
     app.config.from_object('settings')
     app.add_url_rule('/', methods = ['GET','POST'], view_func = views.index)
     app.add_url_rule('/submit_db/', methods = ['GET','POST'], view_func=views.results)
-    db_first = Database()
-    
-    db_first.load_trees('static/images')
-    
-    app.config['db']=db_first
     
     
-    print('app created')
-    print('db.last_accessed:{}'.format(db_first.last_accessed))
+   # print('app created')
+    #print('db.last_accessed:{}'.format(db_first.last_accessed))
     
     
     return app
 
 
 app = create_app()
-
+db_first = Database()
+db_first.load_trees('static/images')
+app.config['db']=db_first
 
 if __name__ == "__main__":
+    
     app.run()
