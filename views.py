@@ -47,7 +47,8 @@ def index():
         print('INDEX method is get')
         
         db = current_app.config['db']
-        while(db.n_pics==[]):
+        print(type(db.n_pics))
+        while(db.n_pics is None):
             print('trying to get the db')
             db=current_app.config['db']
         r_list = gen_random_pics(db.n_pics)
