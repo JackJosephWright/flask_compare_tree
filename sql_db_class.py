@@ -105,6 +105,8 @@ class Database:
         print(data.columns)
         sqlite_table = 'scores_table'
         data.to_sql(sqlite_table, sqlite_connection, if_exists = 'replace', index_label = 'pic_number')
+        sqlite_connection.commit()
+        sqlite_connection.close()
     def get_tree_info(self):
         engine , sqlite_connection, insp = self.conn()
         sqlite_table = 'tree_info'
