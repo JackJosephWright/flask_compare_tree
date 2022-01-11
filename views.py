@@ -1,3 +1,4 @@
+from os import name
 from flask import current_app, render_template, request, g
 from random import randint , shuffle , sample
 from flask.helpers import url_for
@@ -36,16 +37,17 @@ def results():
     user_db = db.get_current_user()
     scores_table = db.get_scores_table()
     tree_info = db.get_tree_info()
-    df =pd.concat([user_db,scores_table], axis=0, sort=False).set_index('pic_number')
+    output = pd.concat([user_db, scores_table]).groupby(['pic_number','link']).sum(['W','L']).reset_index()
+    output = output.set_index('pic_number')
     
-    
+    print(output)
     #getting sqlite3 table into program
     #dat = sqlite3.connect('tc.db')
     #query = dat.execute("SELECT * FROM tree_info")
     #cols = [column[0] for column in query.description]
     #tree_info = pd.DataFrame.from_records(data = query.fetchall(), columns = cols).set_index('tree_name')
-    table_list = [scores_table.sort_values(by=['W'],ascending=False).to_html(classes='data'), user_db.sort_values(by=['W'],ascending=False).to_html(classes='data'),tree_info.to_html(classes='data')]
-    db.set_scores_table(df)
+    table_list = [output.sort_values(by=['W'],ascending=False).to_html(classes='data'), user_db.sort_values(by=['W'],ascending=False).to_html(classes='data'),tree_info.to_html(classes='data')]
+    db.set_scores_table(output)
     db.init_user_db()
     return render_template('results.html', tables = table_list)
 

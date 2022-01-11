@@ -95,12 +95,14 @@ class Database:
                     df_length = len(scores_table)
                     scores_table.loc[df_length]=tree
             scores_table = scores_table.sort_values(by=['pic_number']).set_index(['pic_number'])
+            
             scores_table.to_sql(sqlite_table, sqlite_connection, if_exists = 'fail',index_label='pic_number')
         sqlite_connection.close()
         return scores_table
     def set_scores_table(self, data):
-        print(data)
+        
         engine , sqlite_connection, insp = self.conn()
+        print(data.columns)
         sqlite_table = 'scores_table'
         data.to_sql(sqlite_table, sqlite_connection, if_exists = 'replace', index_label = 'pic_number')
     def get_tree_info(self):
@@ -122,4 +124,4 @@ if __name__ == "__main__":
     
     a=Database()
     a.init_user_db()
-    
+    a.drop_scores_table()
