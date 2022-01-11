@@ -18,7 +18,8 @@ def create_app():
     app.add_url_rule('/', methods = ['GET','POST'], view_func = views.index)
     app.add_url_rule('/submit_db/', methods = ['GET','POST'], view_func=views.results)
     
-    
+    db = Database()
+    db.init_user_db()
    
     
     return app
