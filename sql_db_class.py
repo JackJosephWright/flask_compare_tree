@@ -10,7 +10,7 @@ import sqlite3
 class Database:
     def __init__(self):
         self.sqlite_address = 'sqlite:///tc.db'
-        self.image_location='static\images'
+        self.image_location='static/images'
         
     def conn(self):
 
