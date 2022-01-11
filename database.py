@@ -10,6 +10,7 @@ class Database:
         self.last_accessed = []
         self.n_pics = 0
     def load_trees(self, image_location ='static\images'):
+        
         for filename in os.listdir(image_location):
             if filename.endswith('jpg') or filename.endswith('.png'):
                 pic_number = int(re.search('\d', filename).group())
