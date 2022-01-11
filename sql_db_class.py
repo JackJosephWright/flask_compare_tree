@@ -18,6 +18,9 @@ class Database:
         sqlite_connection = engine.connect()
         return [engine, sqlite_connection, inspect(engine)]
     def init_user_db(self):
+
+        engine , sqlite_connection, insp = self.conn()
+        
         user_db = pd.DataFrame(columns = ['pic_number','link','W','L'])
         for filename in os.listdir(self.image_location):
             if filename.endswith('jpg') or filename.endswith('.png'):
@@ -27,7 +30,6 @@ class Database:
                 df_length = len(user_db)
                 user_db.loc[df_length]=tree
         user_db = user_db.sort_values(by=['pic_number']).set_index(['pic_number'])
-        engine, sqlite_connection, insp = self.conn()
         sqlite_table = 'user_table'
         if (insp.has_table(sqlite_table)==True):
             user_db.to_sql(sqlite_table,sqlite_connection,if_exists = 'replace',index_label='pic_number')
